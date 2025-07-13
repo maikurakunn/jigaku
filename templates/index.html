@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>自学サイト</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+    <script>
+    function acceptCookies() {
+        fetch("/accept_cookies", { method: "POST" })
+            .then(() => {
+                document.getElementById('cookie-banner').style.display = 'none';
+            });
+    }
+
+    window.onload = function() {
+        const banner = document.getElementById('cookie-banner');
+        {% if not cookie_accepted %}
+            banner.style.display = 'block';
+        {% endif %}
+    };
+    </script>
+
+</head>
+
+
+<body>
+
+    <a href="{{ url_for('index') }}" class="saito">
+        <img src="{{ url_for('static', filename='saitoico.png') }}" class="ロゴ">
+        <h1 class="site-title">自学サイト</h1>
+    </a>
+
+
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        このサイトはCookieを使用します。
+        <button onclick="acceptCookies()">OK</button>
+    </div>
+    <!-- ヘッダー（ナビ） -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="#articles">記事</a></li>
+            <li><a href="{{ url_for('kanji_lookup') }}">漢字検索</a></li>
+            <li><a href="{{ url_for('ColorPicker') }}">カラーピッカー</a></li>
+            <li><a href="{{ url_for('omikuji') }}">おみくじ</a></li>
+            <li><a href="{{ url_for('show_source')}}">サーバーコード</a></li>
+        </ul>
+    </div>
+
+
+    <form action="{{ url_for('search') }}" method="get" class="search-form">
+        <select name="type">
+            <option value="article">記事を検索</option>
+            <option value="feature">機能を検索</option>
+        </select>
+        <input type="text" name="q" placeholder="キーワード..." required>
+        <input type="submit" value="検索">
+    </form>
+
+    {% if not matched_functions or "記事" in matched_functions %}
+    <h2 id="articles">記事</h2>
+    <ul>
+        {% for article in articles %}
+        <li><a href="{{ url_for('article', filename=article) }}">{{ article }}</a></li>
+        {% else %}
+        <li>記事はありません</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <br><br>
+
+    {% if not matched_functions or "配布ファイル" in matched_functions %}
+    <h2 id="files">配布ファイル</h2>
+    <ul>
+        {% for filename in uploaded_files %}
+        <li><a href="{{ url_for('download_file', filename=filename) }}">{{ filename }}</a></li>
+        {% else %}
+        <li>配布ファイルはありません</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <br><br>
+
+
+    {% if not matched_functions or "管理者画面へ" in matched_functions %}
+    <p id="admin"><a href="{{ url_for('login') }}">管理者画面へ</a></p>
+    {% endif %}
+
+    {% if not matched_functions or "不正アクセス一覧" in matched_functions %}
+    <p id="ips"><a href="{{ url_for('blocked_ips') }}">不正アクセス一覧</a></p>
+    {% endif %}
+
+    
+
+    <footer>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='saitoico.png') }}" class="logo2">
+            <p>© 2025 自学サイト</p>
+        </a>
+
+        <p>ご質問やお問い合わせは <a href="mailto:maikurakunn092401@gmail.com">maikurakunn092401@gmail.com</a></p>
+        <small>すべての権利を保有しています。</small>
+    </footer>
+</body>
+</html>

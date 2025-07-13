@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+    <title>403エラー</title>
+</head>
+<body>
+    <a href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='saitoico.png') }}" class="ロゴ">
+    </a>
+    <h1>403エラー</h1>
+    <p>アクセス権限がありません。</p>
+    <p>サイトの管理者に、問い合わせてください。</p>
+    <p><a href="mailto:maikurakunn092401@gmail.com">maikurakunn092401@gmail.com</a></p>
+
+    <a href="{{ url_for('index') }}">戻る</a>
+
+</body>
+</html>

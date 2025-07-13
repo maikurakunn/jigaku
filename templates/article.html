@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="saito">
+      <img src="{{ url_for('static', filename='saitoico.png') }}" alt="ロゴ" class="ロゴ">
+      <h1>自学サイト</h1>
+    </a>
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+    <main>
+        <div class="article-content">
+            {{ content | safe }}
+        </div>
+    </main>
+    <a href="{{ url_for('index') }}">← 戻る</a>
+</body>
+</html>

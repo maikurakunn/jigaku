@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ブロックされたIPアドレス一覧</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="saito">
+      <img src="{{ url_for('static', filename='saitoico.png') }}" alt="ロゴ" class="ロゴ">
+      <h1>自学サイト</h1>
+    </a>
+    <h1>ブロックされたIPログ</h1>
+
+    {% if blocked_ips %}
+        <ul>
+        {% for entry in blocked_ips %}
+            <li>{{ entry.ip }} - アクセス日時: {{ entry.timestamp }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>ブロックされたIPはありません。</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">← 戻る</a></p>
+</body>
+</html>

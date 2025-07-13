@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>おみくじ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="saito">
+      <img src="{{ url_for('static', filename='saitoico.png') }}" alt="ロゴ" class="ロゴ">
+      <h1>自学サイト</h1>
+    </a>
+
+    
+    <h1>今日の運勢をチェック✨</h1>
+
+    <form method="POST">
+        <button type="submit">おみくじを引く！🎯</button>
+    </form>
+
+    {% if result %}
+    <h2>結果：{{ result }}</h2>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">戻る</a></p>
+
+</body>
+</html>

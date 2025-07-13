@@ -1,0 +1,52 @@
+<h1>マインクラフト executeコマンド</h2>
+    <p><code>execute</code>コマンドは、様々な条件に基づいて別のコマンドを実行させる強力なコマンドです。</p>
+    <h3>基本的な構文</h3>
+    <pre><code>execute as &lt;エンティティ&gt; at &lt;座標&gt; run &lt;実行するコマンド&gt;</code></pre>
+    <ul>
+        <li><code>as &lt;エンティティ&gt;</code>: コマンドを実行するエンティティを指定します。</li>
+        <li><code>at &lt;座標&gt;</code>: コマンドを実行する座標を指定します。</li>
+        <li><code>run &lt;実行するコマンド&gt;</code>: 実際に実行するコマンドを指定します。</li>
+    </ul>
+    <h3>よく使うサブコマンド</h3>
+    <ul>
+        <li><code>if</code> / <code>unless</code>: 特定の条件を満たす場合にのみ後続のコマンドを実行します。
+            <ul>
+                <li><code>if block &lt;座標&gt; &lt;ブロック&gt;</code></li>
+                <li><code>if entity &lt;エンティティ&gt;</code></li>
+                <li><code>if score &lt;エンティティ&gt; &lt;目的&gt; &lt;演算子&gt; &lt;値&gt;</code></li>
+                <li><code>if data &lt;ストレージ&gt; &lt;パス&gt;</code></li>
+                <li><code>unless</code> は <code>if</code> の否定形です。</li>
+            </ul>
+        </li>
+        <li><code>positioned &lt;座標&gt;</code>: コマンドを実行する座標を変更します。</li>
+        <li><code>rotated &lt;ヨー&gt; &lt;ピッチ&gt;</code> / <code>rotated as &lt;エンティティ&gt;</code>: コマンドを実行するエンティティの向きを変更します。</li>
+        <li><code>dimension &lt;ディメンション&gt;</code>: コマンドを実行するディメンションを指定します。</li>
+        <li><code>anchored &lt;足 | 目&gt;</code>: コマンドの基準点をエンティティの足元または目に設定します。</li>
+        <li><code>store &lt;結果の種類&gt; &lt;ターゲット&gt; &lt;データパス&gt; &lt;スケール&gt;</code>: コマンドの結果を保存します。</li>
+    </ul>
+    <h3>便利な応用例</h3>
+    <ol>
+        <li>特定の場所にいるプレイヤーにメッセージを表示する:
+            <pre><code>execute as @a at 100 64 200 if entity @s[distance=..5] run say こんにちは！近くにいますね！</code></pre>
+        </li>
+        <li>特定のアイテムを持っているエンティティの周囲にパーティクルを表示する:
+            <pre><code>execute as @e[nbt={Inventory:[{id:"minecraft:diamond_sword"}]}] at @s run particle minecraft:flame ~ ~1 ~ 0.2 0.2 0.2 0.01 10 force</code></pre>
+        </li>
+        <li>体力が一定以下のプレイヤーに回復効果を与える:
+            <pre><code>execute as @a[scores={health=..10}] run effect give @s minecraft:regeneration 1 1 true</code></pre>
+        </li>
+        <li>特定のブロックを破壊したプレイヤーの近くに雷を落とす:
+            <pre><code>execute as @a[nbt={SelectedItem:{id:"minecraft:diamond_pickaxe"}}] at @s if block ~ ~-1 ~ minecraft:stone run summon minecraft:lightning_bolt ~ ~ ~</code></pre>
+        </li>
+        <li>特定の場所にいるエンティティの向きに合わせて矢を発射する:
+            <pre><code>execute as @e[type=minecraft:skeleton,tag=archer] at @s rotated as @s run summon minecraft:arrow ^ ^1 ^1 {Motion:[0.0,0.5,1.0f]}</code></pre>
+        </li>
+    </ol>
+    <h3>注意点</h3>
+    <ul>
+        <li>複雑になりすぎるとデバッグが難しくなることがあります。</li>
+        <li>セレクター、NBTデータ、スコアボードの理解が重要です。</li>
+        <li>コマンドブロックでの連続実行時の負荷に注意が必要です。</li>
+    </ul>
+
+    <!--マイクラのコマンドについて-executeコマンド.html-->

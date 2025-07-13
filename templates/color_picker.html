@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カラーピッカー</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+    <style>
+        body {
+            transition: background-color 0.3s ease;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .color-label {
+            margin-bottom: 10px;
+        }
+
+        #colorCode {
+            margin-top: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="saito">
+      <img src="{{ url_for('static', filename='saitoico.png') }}" alt="ロゴ" class="ロゴ">
+      <h1>自学サイト</h1>
+    </a>
+    
+    <h1>カラーピッカー</h1>
+
+    <label for="colorInput" class="color-label">背景色を選んでね:</label>
+    <input type="color" id="colorInput">
+    <p id="colorCode">選択中の色コード: </p>
+
+    <br><br>
+    <a href="{{ url_for('index') }}">← 戻る</a>
+
+    <script>
+        const colorInput = document.getElementById("colorInput");
+        const colorCode = document.getElementById("colorCode");
+
+        // 保存された色があれば使う。なければデフォルト色。
+        const savedColor = localStorage.getItem("bgColor") || "#f9fafb";
+        document.body.style.backgroundColor = savedColor;
+        colorInput.value = savedColor;
+        colorCode.textContent = "選択中の色コード: " + savedColor;
+
+        colorInput.addEventListener("input", () => {
+            const newColor = colorInput.value;
+            document.body.style.backgroundColor = newColor;
+            colorCode.textContent = "選択中の色コード: " + newColor;
+            localStorage.setItem("bgColor", newColor); // 保存
+        });
+    </script>
+</body>
+</html>

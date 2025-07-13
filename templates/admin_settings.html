@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント設定</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="saito">
+      <img src="{{ url_for('static', filename='saitoico.png') }}" alt="ロゴ" class="ロゴ">
+      <h1>自学サイト</h1>
+    </a>
+    <h1>アカウント設定</h1>
+
+    <p>現在ログイン中のアカウント: <strong>{{ session['username'] }}</strong></p>
+
+    <form action="{{ url_for('admin_settings') }}" method="POST">
+        <label for="new_username">新しいユーザー名:</label><br>
+        <input type="text" name="new_username" id="new_username"><br><br>
+
+        <label for="new_password">新しいパスワード:</label><br>
+        <input type="password" name="new_password" id="new_password"><br><br>
+
+        <button type="submit">変更を保存</button>
+    </form>
+
+    <p><a href="{{ url_for('admin') }}">← 管理者画面に戻る</a></p>
+</body>
+</html>

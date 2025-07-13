@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログイン</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='saitoico.png') }}">
+</head>
+
+<body>
+    <a href="{{ url_for('index') }}" class="saito">
+      <img src="{{ url_for('static', filename='saitoico.png') }}" alt="ロゴ" class="ロゴ">
+      <h1>自学サイト</h1>
+    </a>
+  <h1>管理者ログイン</h1>
+  <form method="POST">
+    <input type="text" name="username" placeholder="ユーザー名"><br>
+    <input type="password" name="password" placeholder="パスワード"><br>
+    <button type="submit">ログイン</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<h1> WifiteのWindowsでのインストール方法</h1>
+<h2>WifiteのWindowsでのインストール方法</h2>
+    <p>Wifiteは、**本来Linux環境（特にKali Linuxのようなペネトレーションテスト用のディストリビューション）向けに設計されたツール**であり、**Windowsに直接インストールして使用することはできません**。これは、Wifiteが動作するために必要な特定のLinuxカーネル機能やワイヤレスアダプターのサポートがWindowsにはないためです。</p>
+    <p>しかし、Windows環境でWifiteを利用したい場合は、以下のいずれかの方法を検討できます。</p>
+    <h3>1. 仮想マシン (Virtual Machine) を使用する</h3>
+    <p>これが最も一般的で推奨される方法です。Windows上に仮想化ソフトウェアをインストールし、その中にLinux（Kali Linuxが推奨）を導入します。</p>
+    <ol>
+        <li><strong>仮想化ソフトウェアのインストール:</strong>
+            <ul>
+                <li>**VMware Workstation Player** (無償版あり) や **Oracle VirtualBox** (無償) などの仮想化ソフトウェアをWindows PCにインストールします。</li>
+            </ul>
+        </li>
+        <li><strong>Kali Linuxのダウンロード:</strong>
+            <ul>
+                <li><a href="https://www.kali.org/get-kali/#kali-virtual-machines">Kali Linuxの公式サイト</a>から、使用する仮想化ソフトウェアに合ったイメージファイル（VMwareイメージやVirtualBoxイメージ）をダウンロードします。</li>
+            </ul>
+        </li>
+        <li><strong>仮想マシンにKali Linuxをセットアップ:</strong>
+            <ul>
+                <li>ダウンロードしたイメージを使って、仮想化ソフトウェア上にKali Linuxの仮想マシンを作成し、起動します。</li>
+            </ul>
+        </li>
+        <li><strong>USBワイヤレスアダプターの用意:</strong>
+            <ul>
+                <li>WifiteがWi-Fiネットワークをスキャンし、攻撃を実行するためには、**モニターモードとパケットインジェクションに対応したUSBワイヤレスアダプター**が必要です。PC内蔵のWi-Fiチップではほとんどの場合対応していません。一般的な対応チップセットはRealtek RTL8812AU、Atheros AR9271などです。</li>
+            </ul>
+        </li>
+        <li><strong>USBアダプターの仮想マシンへの割り当て:</strong>
+            <ul>
+                <li>用意したUSBワイヤレスアダプターをPCに接続し、仮想化ソフトウェアの設定で、そのUSBデバイスをKali Linuxの仮想マシンに割り当てます。</li>
+            </ul>
+        </li>
+        <li><strong>Kali Linux内でのWifiteの利用:</strong>
+            <ul>
+                <li>Kali LinuxにはWifiteがプリインストールされているので、ターミナルを開いて<code>wifite</code>コマンドを実行すれば利用できます。</li>
+            </ul>
+        </li>
+    </ol>
+    <p>---</p>
+    <h3>2. WSL (Windows Subsystem for Linux) を使用する（非推奨/限定的）</h3>
+    <p>WSLはWindows上でLinux環境を動かすことができますが、**Wifiteのようなワイヤレスアダプターを直接操作するツールには不向き**です。</p>
+    <ul>
+        <li>WSLはハードウェアへの直接アクセスに制限があるため、**ワイヤレスアダプターのモニターモードやパケットインジェクションといった機能を利用できません**。</li>
+        <li>そのため、WSL環境でWifiteを実行しても、Wi-Fiネットワークのスキャンや攻撃に必要な機能が動作せず、期待通りの結果は得られません。</li>
+    </ul>
+    <p>---</p>
+    <h3>まとめ</h3>
+    <p>WifiteをWindows環境で利用したい場合は、**仮想マシンにKali Linuxをインストールし、対応するUSBワイヤレスアダプターを使用する**のが唯一の実用的な方法です。WSLは、一般的なLinuxコマンドの実行には便利ですが、Wifiteの機能を利用するには適していません。</p>
+    <p>この情報がWifiteの利用を検討する上で役立てば幸いです。</p>

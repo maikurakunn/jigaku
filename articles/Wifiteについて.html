@@ -1,0 +1,33 @@
+<h2>Wifiteについて</h2>
+    <p>Wifiteは、Linux環境で利用できるオープンソースのワイヤレスネットワークセキュリティ監査ツールです。主に、WEP、WPA、WPSで暗号化されたWi-Fiネットワークに対する侵入テストを自動化するために設計されています。</p>
+    <h3>Wifiteの主な特徴</h3>
+    <ul>
+        <li><strong>自動化:</strong> 周囲のWi-Fiネットワークをスキャンし、WEP、WPA、WPSが有効になっているネットワークを自動的に識別します。</li>
+        <li><strong>複数の攻撃手法:</strong> WEPに対する様々な攻撃（例えば、ARPリプレイ、ChopChopなど）、WPA/WPA2に対する辞書攻撃、WPSに対するPIN総当たり攻撃（ReaverやPixieWPSを利用）など、複数の攻撃手法をサポートしています。</li>
+        <li><strong>カスタマイズ可能:</strong> ターゲットとするネットワークのフィルタリング（信号強度、暗号化方式、チャンネルなど）、使用する攻撃ツールの選択、MACアドレスの偽装など、様々なオプションを設定できます。</li>
+        <li><strong>使いやすさ:</strong> コマンドラインツールでありながら、比較的シンプルな操作で利用できます。</li>
+        <li><strong>Aircrack-ngスイートとの連携:</strong> バックエンドでAircrack-ngのツール群（airodump-ng、aircrack-ng、aireplay-ngなど）を利用して、パケットのキャプチャや解析、攻撃を実行します。</li>
+    </ul>
+    <h3>Wifiteの基本的な使い方</h3>
+    <p>Wifiteは通常、Kali Linuxなどのペネトレーションテストに特化したLinuxディストリビューションにプリインストールされています。ターミナルを開き、<code>wifite</code>コマンドを実行することで起動します。</p>
+    <pre><code>wifite</code></pre>
+    <p>Wifiteは起動すると、周囲のWi-Fiネットワークをスキャンし、ターゲットとなるネットワークのリストを表示します。ユーザーは、攻撃したいネットワークの番号を選択することで、自動的に攻撃プロセスが開始されます。</p>
+    <p>より詳細なオプションを指定することも可能です。例えば、特定のインターフェースを指定したり、特定の攻撃手法のみを実行したりすることができます。</p>
+    <pre><code>wifite -i wlan0 -wpa   # wlan0インターフェースでWPAネットワークのみをターゲットにする
+wifite -i wlan0 -wps   # wlan0インターフェースでWPSネットワークのみをターゲットにする
+wifite -i wlan0 -crack # ハンドシェイクファイルを使ってWPA/WPA2のパスワードをクラックする</code></pre>
+    <h3>Wifiteを利用する上での注意点</h3>
+    <ul>
+        <li><strong>法的および倫理的な考慮事項:</strong> 許可なく他者のWi-Fiネットワークに対して侵入テストを行うことは、違法行為にあたる可能性があります。必ず、自身が管理するネットワークや、正当な許可を得たネットワークに対してのみ利用してください。</li>
+        <li><strong>ツールの理解:</strong> Wifiteは多くの処理を自動化しますが、その背後でどのような攻撃が行われているかを理解しておくことが重要です。</li>
+        <li><strong>成功の保証はない:</strong> Wi-Fiネットワークのセキュリティ設定や環境によっては、必ずしもパスワードを解読できるとは限りません。</li>
+    </ul>
+    <h3>Wifiteのインストール</h3>
+    <p>Wifiteがインストールされていない場合は、通常以下のコマンドでインストールできます（Debian/Ubuntu系の場合）。</p>
+    <pre><code>sudo apt update
+sudo apt install wifite</code></pre>
+    <p>または、GitHubリポジトリから直接クローンしてインストールすることも可能です。</p>
+    <pre><code>git clone https://github.com/derv82/wifite.git
+cd wifite
+sudo python setup.py install</code></pre>
+    <p>Wifiteは、ワイヤレスネットワークのセキュリティを評価するための強力なツールですが、その利用は常に法的かつ倫理的な範囲内で行うように心がけてください。</p>
