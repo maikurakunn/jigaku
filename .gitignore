@@ -1,9 +1,0 @@
-__pycache__/
-*.pyc
-*.log
-*.sqlite3
-*.db
-.env
-IP.json
-users.json
-.DS_Store
